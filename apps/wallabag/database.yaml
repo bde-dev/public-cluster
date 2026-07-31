@@ -1,0 +1,48 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: wallabag-db-prod-cnpg-v2
+  annotations:
+    cnpg.io/skipEmptyWalArchiveCheck: "enabled"
+spec:
+  instances: 1
+
+  monitoring:
+    enablePodMonitor: true
+
+  inheritedMetadata:
+    labels:
+      app: wallabag-database
+      network-policy-type: database
+
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: wallabag-db-barman-store
+        serverName: wallabag-db-prod-cnpg-v0
+
+  externalClusters:
+    - name: clusterBackup
+      plugin:
+        name: barman-cloud.cloudnative-pg.io
+        parameters:
+          barmanObjectName: wallabag-db-barman-store
+          serverName: wallabag-db-prod-cnpg-v0
+
+  bootstrap:
+    recovery:
+      source: clusterBackup
+
+  storage:
+    size: 20Gi
+
+  managed:
+    services:
+      additional:
+        - selectorType: rw
+          serviceTemplate:
+            metadata:
+              name: wallabag-db
+            spec:
+              type: ClusterIP

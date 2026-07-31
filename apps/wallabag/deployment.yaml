@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wallabag
+spec:
+  replicas: 1
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+
+  selector:
+    matchLabels:
+      app: wallabag
+
+  template:
+    metadata:
+      labels:
+        app: wallabag
+
+    spec:
+      imagePullSecrets:
+        - name: harbor-registry-creds
+
+      containers:
+        - name: wallabag
+          image: ghcr.io/wallabag/docker:2.6.14
+
+          resources:
+            requests:
+              memory: 150Mi
+            limits:
+              memory: 250Mi
+
+          securityContext:
+            allowPrivilegeEscalation: false
+
+          envFrom:
+            - configMapRef:
+                name: wallabag-configmap
+            - secretRef:
+                name: wallabag-app-secrets
+
+          ports:
+            - containerPort: 80
+              protocol: TCP

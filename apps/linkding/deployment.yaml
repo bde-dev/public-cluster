@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linkding
+spec:
+  replicas: 1
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+
+  selector:
+    matchLabels:
+      app: linkding
+
+  template:
+    metadata:
+      labels:
+        app: linkding
+        network-policy-type: app
+
+    spec:
+      securityContext:
+        runAsUser: 33
+        runAsGroup: 33
+        fsGroup: 33
+
+      imagePullSecrets:
+        - name: harbor-registry-creds
+
+      containers:
+        - name: linkding
+          image: sissbruecker/linkding:1.45.0
+
+          resources:
+            requests:
+              memory: 150Mi
+            limits:
+              memory: 250Mi
+
+          securityContext:
+            allowPrivilegeEscalation: false
+
+          envFrom:
+            - configMapRef:
+                name: linkding-configmap
+            - secretRef:
+                name: linkding-app-secrets
+
+          ports:
+            - containerPort: 3003
+              protocol: TCP
+
+          volumeMounts:
+            - name: linkding-data
+              mountPath: /etc/linkding/data
+
+      restartPolicy: Always
+
+      volumes:
+        - name: linkding-data
+          persistentVolumeClaim:
+            claimName: linkding-data-pvc

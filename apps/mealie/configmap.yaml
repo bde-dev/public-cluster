@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mealie-configmap
+data:
+  PUID: "911"
+  GUID: "911"
+  TZ: Europe/London
+  BASE_URL: "https://mealie.bde-dev.net"
+  DB_ENGINE: postgres
+  POSTGRES_SERVER: mealie-db
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: mealie
+  LOG_LEVEL: debug
+  OPENAI_ENABLE_IMAGE_SERVICES: "false"
+  TOKEN_TIME: "2160"

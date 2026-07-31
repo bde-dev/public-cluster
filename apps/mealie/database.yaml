@@ -1,0 +1,48 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: mealie-db-prod-cnpg-v3
+  annotations:
+    cnpg.io/skipEmptyWalArchiveCheck: "enabled"
+spec:
+  instances: 1
+
+  monitoring:
+    enablePodMonitor: true
+
+  inheritedMetadata:
+    labels:
+      app: mealie-database
+      network-policy-type: database
+
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: mealie-db-barman-store
+        serverName: mealie-db-prod-cnpg-v0
+
+  externalClusters:
+    - name: clusterBackup
+      plugin:
+        name: barman-cloud.cloudnative-pg.io
+        parameters:
+          barmanObjectName: mealie-db-barman-store
+          serverName: mealie-db-prod-cnpg-v0
+
+  bootstrap:
+    recovery:
+      source: clusterBackup
+
+  storage:
+    size: 1Gi
+
+  managed:
+    services:
+      additional:
+        - selectorType: rw
+          serviceTemplate:
+            metadata:
+              name: mealie-db
+            spec:
+              type: ClusterIP

@@ -1,0 +1,48 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: linkding-db-prod-cnpg-v2
+  annotations:
+    cnpg.io/skipEmptyWalArchiveCheck: "enabled"
+spec:
+  instances: 1
+
+  monitoring:
+    enablePodMonitor: true
+
+  inheritedMetadata:
+    labels:
+      app: linkding-database
+      network-policy-type: database
+
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: linkding-db-barman-store
+        serverName: linkding-db-prod-cnpg-v0
+
+  externalClusters:
+    - name: clusterBackup
+      plugin:
+        name: barman-cloud.cloudnative-pg.io
+        parameters:
+          barmanObjectName: linkding-db-barman-store
+          serverName: linkding-db-prod-cnpg-v0
+
+  bootstrap:
+    recovery:
+      source: clusterBackup
+
+  storage:
+    size: 1Gi
+
+  managed:
+    services:
+      additional:
+        - selectorType: rw
+          serviceTemplate:
+            metadata:
+              name: linkding-db
+            spec:
+              type: ClusterIP
