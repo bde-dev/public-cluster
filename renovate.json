@@ -5,26 +5,36 @@
       "/^apps/.+\\.yaml$/"
     ]
   },
-  "branchConcurrentLimit": 0,
-  "prConcurrentLimit": 0,
-  "prHourlyLimit": 0,
   "packageRules": [
     {
-      "matchFileNames": ["apps/**"],
-      "addLabels": ["apps"]
+      "matchFileNames": [
+        "apps/**"
+      ],
+      "addLabels": [
+        "apps"
+      ]
     },
     {
-      "matchFileNames": ["mise.toml"],
-      "addLabels": ["mise"]
+      "matchFileNames": [
+        "mise.toml"
+      ],
+      "addLabels": [
+        "mise"
+      ]
     },
     {
       "description": "Group cloudflared bumps across all app tunnels into one PR.",
-      "matchPackageNames": ["cloudflare/cloudflared", "docker.io/cloudflare/cloudflared"],
+      "matchPackageNames": [
+        "cloudflare/cloudflared",
+        "docker.io/cloudflare/cloudflared"
+      ],
       "groupName": "cloudflared"
     },
     {
       "description": "Link commafeed to GitHub. versioning regex filters to -postgresql tags only. changelogUrl links to CHANGELOG.md since the tag suffix prevents automatic release note embedding.",
-      "matchPackageNames": ["athou/commafeed"],
+      "matchPackageNames": [
+        "athou/commafeed"
+      ],
       "sourceUrl": "https://github.com/Athou/commafeed",
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-postgresql$",
       "changelogUrl": "https://github.com/Athou/commafeed/blob/master/CHANGELOG.md"
