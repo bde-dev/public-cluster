@@ -2,6 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
   name: wallabag-db-scheduled-backup
+  namespace: wallabag
 spec:
   cluster:
     name: wallabag-db-prod-cnpg-v2

@@ -2,6 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: mealie-db-prod-cnpg-v3
+  namespace: mealie
   annotations:
     cnpg.io/skipEmptyWalArchiveCheck: "enabled"
 spec:

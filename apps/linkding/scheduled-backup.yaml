@@ -2,6 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
   name: linkding-db-scheduled-backup
+  namespace: linkding
 spec:
   cluster:
     name: linkding-db-prod-cnpg-v2

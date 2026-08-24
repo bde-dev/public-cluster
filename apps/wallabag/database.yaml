@@ -2,6 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: wallabag-db-prod-cnpg-v2
+  namespace: wallabag
   annotations:
     cnpg.io/skipEmptyWalArchiveCheck: "enabled"
 spec:

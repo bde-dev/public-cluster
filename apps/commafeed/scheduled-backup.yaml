@@ -2,6 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
   name: commafeed-db-scheduled-backup
+  namespace: commafeed
 spec:
   cluster:
     name: commafeed-db-prod-cnpg-v2

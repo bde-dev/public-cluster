@@ -2,6 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: linkding-db-prod-cnpg-v2
+  namespace: linkding
   annotations:
     cnpg.io/skipEmptyWalArchiveCheck: "enabled"
 spec:
