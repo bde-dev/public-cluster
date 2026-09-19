@@ -1,6 +1,6 @@
 [tools]
 helm = "4.1.0"
-kubectl = "1.34.1"
+kubectl = "1.37.0"
 
 [settings]
 pin = true
