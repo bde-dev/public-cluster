@@ -1,5 +1,5 @@
 [tools]
-helm = "4.1.0"
+helm = "4.3.0"
 kubectl = "1.37.0"
 
 [settings]
