@@ -21,6 +21,8 @@ spec:
       labels:
         app: linkding
         network-policy-type: app
+      annotations:
+        instrumentation.opentelemetry.io/inject-python: "true"
 
     spec:
       securityContext:

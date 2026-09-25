@@ -21,6 +21,8 @@ spec:
       labels:
         app: commafeed
         network-policy-type: app
+      annotations:
+        instrumentation.opentelemetry.io/inject-java: "true"
 
     spec:
       securityContext:

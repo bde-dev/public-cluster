@@ -20,6 +20,8 @@ spec:
     metadata:
       labels:
         app: social-to-mealie
+      annotations:
+        instrumentation.opentelemetry.io/inject-nodejs: "true"
 
     spec:
       #       securityContext:
