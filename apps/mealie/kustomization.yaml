@@ -13,3 +13,4 @@ resources:
   - networkpolicy.yaml
   - barman-object-store.yaml
   - scheduled-backup.yaml
+  - instrumentation.yaml
