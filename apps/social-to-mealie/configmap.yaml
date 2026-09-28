@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: social-to-mealie-configmap
-  namespace: social-to-mealie
+  namespace: mealie
 data:
   OPENAI_URL: https://api.openai.com/v1
   TRANSCRIPTION_MODEL: whisper-1
