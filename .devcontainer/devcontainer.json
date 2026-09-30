@@ -1,4 +1,5 @@
 {
+  "name": "public-cluster",
   "build": {
     "context": "..",
     "dockerfile": "Dockerfile"
