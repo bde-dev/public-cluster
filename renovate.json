@@ -3,6 +3,11 @@
   "labels": [
     "renovate"
   ],
+  "argocd": {
+    "managerFilePatterns": [
+      "/^argocd/.+\\.yaml$/"
+    ]
+  },
   "kubernetes": {
     "managerFilePatterns": [
       "/^apps/.+\\.yaml$/"
@@ -15,6 +20,14 @@
       ],
       "addLabels": [
         "apps"
+      ]
+    },
+    {
+      "matchFileNames": [
+        "argocd/**"
+      ],
+      "addLabels": [
+        "argocd"
       ]
     },
     {
