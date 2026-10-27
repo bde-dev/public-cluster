@@ -4,7 +4,7 @@ metadata:
   name: wallabag
   namespace: wallabag
 spec:
-  replicas: 0
+  replicas: 1
 
   strategy:
     type: RollingUpdate
@@ -27,7 +27,7 @@ spec:
 
       containers:
         - name: wallabag
-          image: ghcr.io/wallabag/docker:2.6.14
+          image: ghcr.io/wallabag/docker:2.6.14.1
 
           resources:
             requests:
