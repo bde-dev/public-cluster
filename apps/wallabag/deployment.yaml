@@ -27,7 +27,7 @@ spec:
 
       containers:
         - name: wallabag
-          image: ghcr.io/wallabag/docker:2.6.14.1
+          image: ghcr.io/wallabag/docker:2.6.15.1
 
           resources:
             requests:
