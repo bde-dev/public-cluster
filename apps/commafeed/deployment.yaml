@@ -35,7 +35,7 @@ spec:
 
       containers:
         - name: commafeed
-          image: athou/commafeed:7.3.2-postgresql
+          image: athou/commafeed:7.5.3-postgresql
 
           resources:
             requests:
